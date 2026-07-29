@@ -42,55 +42,119 @@
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 
 <h3>PROGRAM</h3>
-NAME: MOHANRAM GUNASEKAR
-REG NO: 212223240095
+### NAME: MOHANRAM GUNASEKAR
+### REG NO: 212223240095
 
-```
+```python
 class VacuumCleanerAgent:
-    def init(self):
-        self.location = 0  # Current location of the vacuum cleaner
-        self.environment = ['Clean', 'Dirty', 'Clean']  # Example environment, you can customize as needed
+
+    def __init__(self):
+        self.environment = ["Dirty", "Clean", "Dirty"]
+        self.location = 0
+        self.performance = 0
 
     def sense(self):
-        """Sense the current location"""
         return self.environment[self.location]
 
-    def act(self, percept):
-        """Act based on the percept"""
-        if percept == 'Dirty':
-            self.clean()
-        else:
-            self.move()
-
     def clean(self):
-        """Clean the current location"""
-        print("Cleaning...")
-        self.environment[self.location] = 'Clean'
+        print(f"Room {self.location + 1} is Dirty.")
+        print("Cleaning the room...\n")
+        self.environment[self.location] = "Clean"
+        self.performance += 10
 
     def move(self):
-        """Move to the next location"""
-        print("Moving...")
+        print(f"Moving from Room {self.location + 1}...")
         self.location = (self.location + 1) % len(self.environment)
+        print(f"Reached Room {self.location + 1}\n")
+        self.performance -= 1
 
+    def act(self):
+        percept = self.sense()
 
-# Main function to test the agent
+        print("--------------------------------")
+        print(f"Current Room : {self.location + 1}")
+        print(f"Room Status  : {percept}")
+
+        if percept == "Dirty":
+            self.clean()
+        else:
+            print("Room is already clean.\n")
+
+        self.move()
+
+    def display_environment(self):
+        print("Environment Status")
+        for i in range(len(self.environment)):
+            print(f"Room {i + 1}: {self.environment[i]}")
+        print()
+
 def main():
     agent = VacuumCleanerAgent()
-    print("Initial environment:", agent.environment)
-    for _ in range(len(agent.environment)):
-        percept = agent.sense()
-        print("Percept:", percept)
-        agent.act(percept)
-    print("Environment after cleaning:", agent.environment)
+
+    print("========== VACUUM CLEANER AGENT ==========\n")
+
+    print("Initial Environment")
+    agent.display_environment()
+
+    for i in range(len(agent.environment)):
+        agent.act()
+
+    print("Final Environment")
+    agent.display_environment()
+
+    print("Final Performance Measure:", agent.performance)
 
 
 if __name__ == "__main__":
     main()
+
 ```
 
 
 ## OUTPUT
-![1](https://github.com/Ashwinkumar-03/19AI405ExpNo1/assets/118663725/d38cede4-e4b1-4bd8-8159-bbafbba0d11c)
+```text
+========== VACUUM CLEANER AGENT ==========
+
+Initial Environment
+Environment Status
+Room 1: Dirty
+Room 2: Clean
+Room 3: Dirty
+
+--------------------------------
+Current Room : 1
+Room Status  : Dirty
+Room 1 is Dirty.
+Cleaning the room...
+
+Moving from Room 1...
+Reached Room 2
+
+--------------------------------
+Current Room : 2
+Room Status  : Clean
+Room is already clean.
+
+Moving from Room 2...
+Reached Room 3
+
+--------------------------------
+Current Room : 3
+Room Status  : Dirty
+Room 3 is Dirty.
+Cleaning the room...
+
+Moving from Room 3...
+Reached Room 1
+
+Final Environment
+Environment Status
+Room 1: Clean
+Room 2: Clean
+Room 3: Clean
+
+Final Performance Measure: 17
+```
 
 
 
