@@ -41,10 +41,10 @@
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 
-<h3>PROGRAM
-NAME: MOHANRAM GUNASEKAR
-REG NO: 212223240095
-</h3>
+<h3>PROGRAM</h3>
+<p>NAME: MOHANRAM GUNASEKAR</p>
+<p>REG NO: 212223240095</p>
+
 
 ```python
 class VacuumCleanerAgent:
